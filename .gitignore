@@ -1,9 +1,9 @@
 .env
 .env.*
+!.env.example
 .venv/
 frontend/node_modules/
 **/__pycache__/
 .pytest_cache/
 .mypy_cache/
-AI_prompts.md
 /prompts/
