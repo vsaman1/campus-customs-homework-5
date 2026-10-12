@@ -23,7 +23,13 @@ Use a project-local Python environment and install the backend dependencies:
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-Create a workspace-root `.env` file outside this repository with your own credentials. It must not be committed:
+From the Homework 5 project root, copy the provided template to a local `.env` file. It must not be committed:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Edit `.env` and enter your own Portkey key:
 
 ```text
 PORTKEY_API_KEY=your_key_here
@@ -75,4 +81,4 @@ Open the local URL printed by Vite (normally `http://localhost:5173`). The board
 
 ## Submission Notes
 
-Both database files under `data/` are intentionally tracked so graders can inspect the preserved original and the completed working copy. The repository ignores real environment files, virtual environments, dependency folders, caches, and the separate agent-prompt materials.
+Both database files under `data/` are intentionally tracked so graders can inspect the preserved original and the completed working copy. The repository ignores real environment files, virtual environments, dependency folders, and caches.

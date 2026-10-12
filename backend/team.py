@@ -56,10 +56,10 @@ def _load_prompt(role: AgentRole) -> str:
 
 
 def _portkey_model() -> OpenAIChatModel:
-    load_dotenv(PROJECT_ROOT.parents[1] / ".env", override=True)
+    load_dotenv(PROJECT_ROOT / ".env", override=True)
     api_key = os.environ.get("PORTKEY_API_KEY", "").strip()
     if not api_key:
-        raise RuntimeError("PORTKEY_API_KEY is missing from the workspace-root .env file.")
+        raise RuntimeError("PORTKEY_API_KEY is missing from the project-root .env file.")
     client = AsyncOpenAI(
         api_key=api_key,
         base_url=PORTKEY_BASE_URL,
@@ -73,7 +73,7 @@ def _portkey_model() -> OpenAIChatModel:
 
 
 def _portkey_preflight() -> None:
-    load_dotenv(PROJECT_ROOT.parents[1] / ".env", override=True)
+    load_dotenv(PROJECT_ROOT / ".env", override=True)
     api_key = os.environ.get("PORTKEY_API_KEY", "").strip()
     request = Request(
         f"{PORTKEY_BASE_URL}/models",

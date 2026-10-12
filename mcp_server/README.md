@@ -1,6 +1,6 @@
 # Campus Customs MCP Server
 
-This FastMCP server gives every Homework 5 agent a shared, read-only way to retrieve evidence needed to resolve the open Campus Customs tickets. It uses `../data/campus_customs_new.db`, the working copy of the supplied database.
+This FastMCP server gives every Homework 5 agent shared access to ticket evidence and controlled ticket operations. It uses `../data/campus_customs_new.db`, the working copy of the supplied database. Read tools retrieve evidence; the status and payment write tools require the backend's explicit, named human approval flow before they change ticket or cash data.
 
 Tools:
 
