@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "campus-customs": {
+      "command": "C:\\Users\\bears\\OneDrive\\Documents\\AI Classes\\Homework\\Homework 5\\.venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\Users\\bears\\OneDrive\\Documents\\AI Classes\\Homework\\Homework 5\\mcp_server\\server.py"
+      ],
+      "cwd": "C:\\Users\\bears\\OneDrive\\Documents\\AI Classes\\Homework\\Homework 5"
+    }
+  }
+}

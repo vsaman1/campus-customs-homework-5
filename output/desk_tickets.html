@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Campus Customs Ticket Desk</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172124;
+      --muted: #5d6b6d;
+      --paper: #f5f3ec;
+      --surface: #ffffff;
+      --line: #d7d7cf;
+      --accent: #007f73;
+      --accent-soft: #d8eee9;
+      --warm: #c45f2a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      background: linear-gradient(135deg, #e9f0ed 0%, var(--paper) 52%, #f3eadc 100%);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .desk {
+      width: min(1100px, calc(100% - 32px));
+      margin: 32px auto;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 48px rgba(23, 33, 36, 0.12);
+    }
+
+    header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 28px 32px 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-family: "Trebuchet MS", sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 { margin: 0; font-size: clamp(28px, 4vw, 42px); font-weight: 600; }
+
+    .status {
+      margin: 0;
+      color: var(--muted);
+      font-family: "Trebuchet MS", sans-serif;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    [role="tablist"] {
+      display: flex;
+      overflow-x: auto;
+      border-bottom: 1px solid var(--line);
+      background: #fbfaf6;
+    }
+
+    [role="tab"] {
+      flex: 0 0 auto;
+      min-height: 52px;
+      padding: 0 20px;
+      color: var(--muted);
+      background: transparent;
+      border: 0;
+      border-right: 1px solid var(--line);
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      font: 700 14px/1 "Trebuchet MS", sans-serif;
+      letter-spacing: 0;
+    }
+
+    [role="tab"]:hover { color: var(--ink); background: #f1f3ed; }
+    [role="tab"][aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); background: var(--surface); }
+    [role="tab"]:focus-visible { outline: 3px solid var(--warm); outline-offset: -3px; }
+
+    [role="tabpanel"] { padding: 32px; }
+    [role="tabpanel"][hidden] { display: none; }
+
+    .ticket-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    h2 { margin: 0; font-size: 27px; font-weight: 600; }
+    .ticket-type { color: var(--accent); font-family: "Trebuchet MS", sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; }
+
+    .expected {
+      border-left: 5px solid var(--accent);
+      padding: 4px 0 4px 22px;
+    }
+
+    h3 { margin: 0 0 16px; font-size: 20px; }
+    h4 { margin: 24px 0 8px; color: var(--warm); font-family: "Trebuchet MS", sans-serif; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+    p { margin: 0; font-size: 17px; line-height: 1.55; }
+    ul { margin: 8px 0 0; padding-left: 22px; }
+    li { margin: 8px 0; font-size: 16px; line-height: 1.45; }
+
+    .actual-slot {
+      min-height: 132px;
+      margin-top: 32px;
+      border: 1px dashed #b8beb7;
+      background: repeating-linear-gradient(0deg, transparent, transparent 30px, #f0f0eb 31px);
+    }
+
+    .actual-slot, .result-panel { padding: 22px; }
+    .actual-slot { border-style: solid; border-color: #b9cdbd; background: #f4faf3; }
+    .result-panel { border-left: 5px solid var(--warm); background: #fbf5e9; }
+    .result-panel p + p { margin-top: 12px; }
+
+    .blank-panel { min-height: 420px; }
+
+    @media (max-width: 620px) {
+      .desk { width: min(100% - 20px, 1100px); margin: 10px auto; }
+      header, [role="tabpanel"] { padding: 22px 20px; }
+      header { align-items: start; flex-direction: column; }
+      .status { white-space: normal; }
+      .ticket-heading { align-items: start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <main class="desk">
+    <header>
+      <div>
+        <p class="eyebrow">Campus Customs</p>
+        <h1>Ticket Desk</h1>
+      </div>
+        <p class="status">Expected plans and verified live outcomes</p>
+    </header>
+
+    <div role="tablist" aria-label="Ticket desk sections">
+      <button type="button" role="tab" id="tab-101" aria-selected="true" aria-controls="panel-101">Ticket 101</button>
+      <button type="button" role="tab" id="tab-102" aria-selected="false" aria-controls="panel-102">Ticket 102</button>
+      <button type="button" role="tab" id="tab-103" aria-selected="false" aria-controls="panel-103">Ticket 103</button>
+      <button type="button" role="tab" id="tab-cash" aria-selected="false" aria-controls="panel-cash">Cash</button>
+      <button type="button" role="tab" id="tab-reflection" aria-selected="false" aria-controls="panel-reflection">Reflection</button>
+    </div>
+
+    <section role="tabpanel" id="panel-101" aria-labelledby="tab-101">
+      <div class="ticket-heading"><h2>Ticket 101</h2><span class="ticket-type">Customer order</span></div>
+      <div class="expected">
+        <h3>Expected</h3>
+        <h4>First call</h4>
+        <p>Boss should call Inventory first because the customer needs a specific shirt and size, so first we need to see if we have it.</p>
+        <h4>Expected delegations</h4>
+        <p>Inventory should call Accounting because size S is out of stock and Bulldog Print Co has an overdue $840 invoice that needs to be dealt with before they can ship more. Customer Service can then draft a response for the customer.</p>
+        <h4>Expected MCP tools</h4>
+        <ul><li>Inventory lookup</li><li>Invoice lookup</li><li>Cash balance lookup</li><li>Vendor lead time lookup</li><li>Payment prep if needed</li></ul>
+      </div>
+      <section class="actual-slot" aria-label="Actual section for Ticket 101">
+        <h3>Actual</h3>
+        <p><strong>Agents and delegation:</strong> Boss delegated fulfillment and reprint feasibility to Inventory. No Facilities or Customer Service agent loop ran for this ticket.</p>
+        <p><strong>MCP tools recorded:</strong> <code>get_ticket_101_order_fulfillment</code>, <code>approve_ticket_payment</code>, and <code>update_ticket_status</code>.</p>
+        <p><strong>Outcome:</strong> the clean run verified zero size-S stock and open invoice 501. After explicit human approval, payment 1 recorded the $840 invoice payment; a separate recorded human resolution approval then allowed MCP to mark the ticket resolved. No customer fulfillment date was promised.</p>
+      </section>
+    </section>
+
+    <section role="tabpanel" id="panel-102" aria-labelledby="tab-102" hidden>
+      <div class="ticket-heading"><h2>Ticket 102</h2><span class="ticket-type">Rent notice</span></div>
+      <div class="expected">
+        <h3>Expected</h3>
+        <h4>First call</h4>
+        <p>Boss should call Facilities first because this is a rent and lease issue.</p>
+        <h4>Expected delegations</h4>
+        <p>Facilities should call Accounting to make sure we have enough cash for the $2,400 rent and prepare the payment for human approval. The checking account has $3,400, so we should be able to pay it without going negative.</p>
+        <h4>Expected MCP tools</h4>
+        <ul><li>Lease lookup</li><li>Date lookup</li><li>Cash balance lookup</li><li>Payment prep</li></ul>
+      </div>
+      <section class="actual-slot" aria-label="Actual section for Ticket 102">
+        <h3>Actual</h3>
+        <p><strong>Agents and delegation:</strong> Boss delegated the payment-review task to Accounting. No Facilities, Inventory, or Customer Service agent run is recorded.</p>
+        <p><strong>MCP tools recorded:</strong> <code>get_ticket_context</code>, <code>get_ticket_102_rent_payment_context</code>, <code>prepare_ticket_payment</code>, <code>approve_ticket_payment</code>, and <code>update_ticket_status</code>.</p>
+        <p><strong>Outcome:</strong> Accounting confirmed the $2,400 lease payment could be prepared for review. After explicit payment and resolution approvals, payment 2 recorded the rent to Elm City Properties and MCP marked the ticket resolved. Checking moved from $2,560 to $160.</p>
+      </section>
+    </section>
+
+    <section role="tabpanel" id="panel-103" aria-labelledby="tab-103" hidden>
+      <div class="ticket-heading"><h2>Ticket 103</h2><span class="ticket-type">Price override</span></div>
+      <div class="expected">
+        <h3>Expected</h3>
+        <h4>First call</h4>
+        <p>Boss should call Inventory first because the customer wants 20 medium hoodies and we need to see if we have enough stock.</p>
+        <h4>Expected delegations</h4>
+        <p>Inventory should call Accounting because we only have 8 in stock, so we are short 12. Accounting should check the $22 cost and $58 price to see how much discount we can give while still making money. They may also need to deal with the overdue Bulldog Print Co invoice before more hoodies can ship. Customer Service can draft the final response.</p>
+        <h4>Expected MCP tools</h4>
+        <ul><li>Inventory lookup</li><li>Pricing lookup</li><li>Vendor lead time lookup</li><li>Invoice lookup</li><li>Cash balance lookup</li><li>Payment prep if needed</li></ul>
+      </div>
+      <section class="actual-slot" aria-label="Actual section for Ticket 103">
+        <h3>Actual</h3>
+        <p><strong>Agents and delegation:</strong> Boss delegated inventory review to Inventory and pricing review to Accounting. Customer Service recorded the customer-response draft after the human decision.</p>
+        <p><strong>MCP tools recorded:</strong> <code>get_ticket_103_bulk_discount_context</code> and <code>update_ticket_status</code>.</p>
+        <p><strong>Outcome:</strong> the team verified 8 of 20 requested hoodies, $22 unit cost, and $58 list price. Human approval retained the $58 list price with no discount, authorized an offer for only the 8 in-stock units, and prohibited a commitment for the remaining 12 until replenishment. The customer handling was documented before MCP resolved the ticket. No payment or cash mutation occurred.</p>
+      </section>
+    </section>
+
+    <section role="tabpanel" id="panel-cash" aria-labelledby="tab-cash" hidden>
+      <div class="ticket-heading"><h2>Cash</h2><span class="ticket-type">Verified final state</span></div>
+      <div class="result-panel"><h3>Checking account</h3><p>Starting balance: $3,400.00</p><p>Payment 1: -$840.00 to Bulldog Print Co (invoice 501)</p><p>Payment 2: -$2,400.00 to Elm City Properties (lease 1)</p><p><strong>Final verified balance: $160.00</strong></p></div>
+    </section>
+    <section role="tabpanel" id="panel-reflection" aria-labelledby="tab-reflection" hidden>
+      <div class="ticket-heading"><h2>Reflection</h2><span class="ticket-type">Run outcome</span></div>
+      <div class="result-panel">
+        <h3>1. Agent Performance</h3>
+        <h4>Ticket 101</h4>
+        <p>The agents performed well. Boss correctly brought in Inventory because the central question was whether the size-S Bulldog tee could actually be fulfilled. Inventory confirmed that zero units were in stock and identified the $840 Bulldog Print Co invoice with a five-day lead time. The team stopped before making the payment and waited for my approval. After I approved the payment and separately approved resolution, the ticket was resolved. I especially appreciated that the agents did not promise inventory that was not available.</p>
+        <h4>Ticket 102</h4>
+        <p>Boss brought in Accounting, which confirmed the $2,400 rent amount, the due date, and that checking had enough cash to pay it. The system correctly required my approval before the payment and a separate approval before resolution. Checking fell from $2,560 to $160, which matched the database. This was accurate and appropriately cautious.</p>
+        <h4>Ticket 103</h4>
+        <p>The agents also handled this well after the workflow fixes. Inventory and Accounting confirmed that Yale AI Club wanted 20 medium hoodies, but only 8 were available, with a $22 unit cost and a $58 list price. Instead of inventing a discount or promising the other 12 units, the system stopped and asked me to decide. I approved no discount, retained the $58 price, and authorized an offer for only the 8 available units. This was a strong example of agents gathering facts while leaving the business decision to a human.</p>
+
+        <h3>2. Actual Versus Expected Plan</h3>
+        <h4>Ticket 101</h4>
+        <p>The actual result was close to the expected plan. I expected Inventory to be the first specialist because this was primarily a stock problem, and that happened. I also expected the overdue Bulldog Print Co invoice to matter, and it did. The main difference was that Accounting did not need to run as a separate agent in the clean run because Boss could use MCP evidence and the human approval flow directly.</p>
+        <h4>Ticket 102</h4>
+        <p>The actual result differed slightly from the expected plan. I originally thought Facilities would be called first because this was a rent and lease issue, but the clean run used Boss and Accounting instead. In hindsight, that was more efficient because MCP could retrieve the lease facts directly and the key decision was whether the $2,400 payment could be made safely.</p>
+        <h4>Ticket 103</h4>
+        <p>The actual result was very close to my plan. Inventory and Accounting were both useful: Inventory explained the 12-unit shortage, while Accounting explained the $22 cost and $58 list price. The biggest difference was that I originally expected another vendor or payment issue, but the final resolution required no additional payment. Instead, the agents stopped and asked me to make the pricing and fulfillment decision.</p>
+
+        <h3>3. Work That Could Be Simpler With One Agent</h3>
+        <p>Ticket 102 could probably have been handled by one agent with tools. Its core workflow was simple: check the lease, due date, and cash balance; prepare the payment; and wait for human approval. Multiple agents were not necessary to reason about separate parts of that problem.</p>
+        <p>Ticket 101 also could have been mostly handled by one operations agent because the inventory and vendor-invoice facts were tightly connected. The multi-agent structure was more useful for Ticket 103, where the inventory shortage and financial discount decision were genuinely different questions.</p>
+
+        <h3>4. New Problems the Current Team Can Solve</h3>
+        <h4>Another stockout with an unpaid vendor invoice</h4>
+        <p>For example, if a customer wanted a size-L sweatshirt that was out of stock and the supplier had an unpaid invoice, Inventory could check stock and vendor information while Accounting could evaluate the invoice and cash. The current tools already support this kind of workflow.</p>
+        <h4>Another upcoming rent or lease payment</h4>
+        <p>If Campus Customs received another rent notice, the team could check the lease, current date, cash balance, and existing payments, then prepare the payment for human approval. This would be very similar to Ticket 102.</p>
+        <h4>Another bulk-order discount request</h4>
+        <p>If a student organization wanted 30 shirts at a discount, the agents could check available inventory, unit cost, list price, and requested quantity. They could then present the pricing and stock facts to a human for the final discount and fulfillment decision, similar to Ticket 103.</p>
+
+        <h3>5. New Problems the Current Team Cannot Solve</h3>
+        <h4>Shipment tracking</h4>
+        <p>If a customer asked where a shipped order was, the current system would not have shipment or carrier-tracking data. I would add a Logistics Agent and tools for shipment status, tracking numbers, carrier scans, and estimated delivery dates.</p>
+        <h4>Refunds and returns</h4>
+        <p>The current tools do not include full order history or refund-processing capabilities. I would add tools for completed customer orders, return-eligibility validation, and refund processing. Customer Service could handle the customer interaction while Accounting handled the financial side.</p>
+        <h4>Payroll or scheduling issues</h4>
+        <p>The current database and agents do not include employee schedules, wages, hours, or payroll information. I would add an HR or People Agent with tools for employee records, schedules, time worked, and payroll, keeping employee information separate from shop-operation tools.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const tabs = [...document.querySelectorAll('[role="tab"]')];
+    const panels = [...document.querySelectorAll('[role="tabpanel"]')];
+
+    function selectTab(tab) {
+      tabs.forEach((item) => item.setAttribute('aria-selected', String(item === tab)));
+      panels.forEach((panel) => { panel.hidden = panel.id !== tab.getAttribute('aria-controls'); });
+    }
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => selectTab(tab));
+      tab.addEventListener('keydown', (event) => {
+        if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+        event.preventDefault();
+        const next = (index + (event.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length;
+        tabs[next].focus();
+        selectTab(tabs[next]);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+{
+  "run_date": "2026-10-12",
+  "starting_checking_balance": 3400.0,
+  "final_checking_balance": 160.0,
+  "tickets": [
+    {
+      "id": 101,
+      "subject": "Bulldog tee",
+      "status": "resolved",
+      "outcome": "Verified zero size-S stock and open invoice 501. Human approval recorded the $840 invoice payment and a separate human resolution approval allowed MCP to resolve the ticket.",
+      "participating_agents": [
+        {
+          "agent": "boss",
+          "contribution": "Retrieved fulfillment evidence, delegated inventory review, and recorded the human-authorized resolution."
+        },
+        {
+          "agent": "inventory",
+          "contribution": "Confirmed zero size-S stock and that the five-day reprint lead time was not a delivery commitment."
+        }
+      ],
+      "delegations": ["Boss delegated fulfillment and reprint feasibility review to Inventory."],
+      "mcp_tools": ["get_ticket_101_order_fulfillment", "approve_ticket_payment", "update_ticket_status"],
+      "human_approval": "Human approval: user approved payment 1 for $840.00 and separately authorized resolution after the evidence review.",
+      "payment_id": 1,
+      "payment_amount": 840.0
+    },
+    {
+      "id": 102,
+      "subject": "Rent due",
+      "status": "resolved",
+      "outcome": "Verified lease 1 and due rent. Human approval paid Elm City Properties.",
+      "participating_agents": [
+        {
+          "agent": "boss",
+          "contribution": "Collected lease and cash context, delegated payment review, and prepared the payment proposal."
+        },
+        {
+          "agent": "accounting",
+          "contribution": "Verified the lease amount, due date, existing-payment absence, and cash sufficiency for human review."
+        }
+      ],
+      "delegations": ["Boss delegated the rent-payment review to Accounting."],
+      "mcp_tools": ["get_ticket_context", "get_ticket_102_rent_payment_context", "prepare_ticket_payment", "approve_ticket_payment", "update_ticket_status"],
+      "human_approval": "Human approval: user approved payment 2 for $2,400.00 and separately authorized resolution after the evidence review.",
+      "payment_id": 2,
+      "payment_amount": 2400.0
+    },
+    {
+      "id": 103,
+      "subject": "Bulk hoodie discount",
+      "status": "resolved",
+      "outcome": "Verified 8 of 20 hoodies in stock with $22 cost and $58 list price. Human approval retained the $58 list price, authorized an offer for only the 8 available units, and left the remaining 12 uncommitted until replenishment.",
+      "participating_agents": [
+        {
+          "agent": "boss",
+          "contribution": "Retrieved the hoodie context and routed the approval question for financial review."
+        },
+        {
+          "agent": "accounting",
+          "contribution": "Confirmed that a specific human-approved discount and a shortfall decision are required before authorization."
+        },
+        {
+          "agent": "inventory",
+          "contribution": "Verified that only 8 of the requested 20 medium navy hoodies are currently in stock."
+        },
+        {
+          "agent": "customer_service",
+          "contribution": "Drafted the customer-safe response offering only 8 units at the approved $58 list price and making no commitment for the remaining 12."
+        }
+      ],
+      "delegations": ["Boss delegated inventory review to Inventory and pricing review to Accounting."],
+      "mcp_tools": ["get_ticket_103_bulk_discount_context", "update_ticket_status"],
+      "human_approval": "Human approval: user retained the $58 list price with no discount, authorized an offer for only the 8 in-stock units, and prohibited a commitment for the remaining 12 until replenishment.",
+      "customer_response_file": "output/ticket_103_customer_response.md",
+      "payment_id": null,
+      "payment_amount": 0.0
+    }
+  ],
+  "payments": [
+    {
+      "id": 1,
+      "kind": "invoice_payment",
+      "ref_id": 501,
+      "amount": 840.0,
+      "account": "checking",
+      "approved_by": "Human approval: user"
+    },
+    {
+      "id": 2,
+      "kind": "rent_payment",
+      "ref_id": 1,
+      "amount": 2400.0,
+      "account": "checking",
+      "approved_by": "Human approval: user"
+    }
+  ]
+}

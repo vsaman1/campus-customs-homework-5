@@ -1,0 +1,5 @@
+fastmcp==4.1.0
+pydantic-ai==2.55.0
+python-dotenv>=1.0
+fastapi==0.143.0
+uvicorn[standard]==0.54.0
